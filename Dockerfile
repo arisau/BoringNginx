@@ -2,7 +2,7 @@
 #   https://github.com/nginxinc/docker-nginx/blob/e3e35236b2c77e02266955c875b74bdbceb79c44/mainline/alpine/Dockerfile
 
 FROM alpine:3.8 as builder
-LABEL maintainer "Alex Haydock <alex@alexhaydock.co.uk>"
+LABEL maintainer "Arisau"
 
 # Nginx Version (See: https://nginx.org/en/CHANGES)
 ENV NGINX_VERSION 1.15.3
@@ -166,7 +166,7 @@ RUN /etc/periodic/monthly/geoip
 
 # --- Runtime Container --- #
 FROM alpine:3.8
-LABEL maintainer "Alex Haydock <alex@alexhaydock.co.uk>"
+LABEL maintainer "Arisau"
 
 COPY --from=builder /tmp/buildsource /usr/src
 COPY --from=builder /usr/share/GeoIP/GeoIPv6.dat /usr/share/GeoIP/GeoIPv6.dat
@@ -229,8 +229,10 @@ RUN set -xe \
 
 # Add the default Nginx config files
 # (these are pulled directly from the Nginx team's Docker repo without modification)
-ADD https://raw.githubusercontent.com/nginxinc/docker-nginx/master/mainline/alpine/nginx.conf /etc/nginx/nginx.conf
-ADD https://raw.githubusercontent.com/nginxinc/docker-nginx/master/mainline/alpine/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+ADD https://raw.githubusercontent.com/nginxinc/docker-nginx-unprivileged/master/mainline/alpine/nginx.conf /etc/nginx/nginx.conf
+ADD https://raw.githubusercontent.com/nginxinc/docker-nginx-unprivileged/master/mainline/alpine/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+
+USER nginx
 
 # Runtime settings
 STOPSIGNAL SIGTERM
