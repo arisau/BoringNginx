@@ -234,8 +234,6 @@ ADD https://raw.githubusercontent.com/nginxinc/docker-nginx-unprivileged/master/
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log \
-	&& addgroup -S nginx \
-	&& adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
 	&& chown -R :0 /var/cache/nginx \
 	&& chmod -R g+w /var/cache/nginx
 USER nginx
