@@ -232,10 +232,12 @@ RUN set -xe \
 ADD https://raw.githubusercontent.com/nginxinc/docker-nginx-unprivileged/master/mainline/alpine/nginx.conf /etc/nginx/nginx.conf
 ADD https://raw.githubusercontent.com/nginxinc/docker-nginx-unprivileged/master/mainline/alpine/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
-RUN chown -R :0 /var/cache/nginx \
-	&& chmod -R g+w /var/cache/nginx
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-	&& ln -sf /dev/stderr /var/log/nginx/error.log	
+	&& ln -sf /dev/stderr /var/log/nginx/error.log \
+	&& addgroup -S nginx \
+	&& adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
+	&& chown -R :0 /var/cache/nginx \
+	&& chmod -R g+w /var/cache/nginx
 USER nginx
 # Runtime settings
 STOPSIGNAL SIGTERM
