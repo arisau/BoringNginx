@@ -232,11 +232,10 @@ RUN set -xe \
 ADD https://raw.githubusercontent.com/nginxinc/docker-nginx-unprivileged/master/mainline/alpine/nginx.conf /etc/nginx/nginx.conf
 ADD https://raw.githubusercontent.com/nginxinc/docker-nginx-unprivileged/master/mainline/alpine/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
-USER nginx
-
 RUN chown -R :0 /var/cache/nginx \
 	&& chmod -R g+w /var/cache/nginx
 	
+USER nginx
 # Runtime settings
 STOPSIGNAL SIGTERM
 CMD ["nginx", "-g", "daemon off;"]
