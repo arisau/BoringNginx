@@ -1,4 +1,4 @@
-# alexhaydock/nginx-boringssl-latest
+# riseab/boringnginx
 
 [![](https://images.microbadger.com/badges/image/alexhaydock/nginx-boringssl-latest.svg)](https://microbadger.com/images/alexhaydock/nginx-boringssl-latest "Get your own image badge on microbadger.com")
 
