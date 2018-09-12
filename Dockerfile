@@ -234,7 +234,8 @@ ADD https://raw.githubusercontent.com/nginxinc/docker-nginx-unprivileged/master/
 
 RUN chown -R :0 /var/cache/nginx \
 	&& chmod -R g+w /var/cache/nginx
-	
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+	&& ln -sf /dev/stderr /var/log/nginx/error.log	
 USER nginx
 # Runtime settings
 STOPSIGNAL SIGTERM
