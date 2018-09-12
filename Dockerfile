@@ -234,6 +234,9 @@ ADD https://raw.githubusercontent.com/nginxinc/docker-nginx-unprivileged/master/
 
 USER nginx
 
+RUN chown -R :0 /var/cache/nginx \
+	&& chmod -R g+w /var/cache/nginx
+	
 # Runtime settings
 STOPSIGNAL SIGTERM
 CMD ["nginx", "-g", "daemon off;"]
